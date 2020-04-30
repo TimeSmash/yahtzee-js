@@ -13,26 +13,19 @@
     <body>
         <h1>YAHTZEE</h1>
         <div id ="play-area">
-
+            <div id="dice-area"></div>
         </div>
         <div id="score-area">
             <table id="upper-scorecard">
                 <tr>
                     <!-- <em>Upper Section</em> -->
                     <th>Upper Section</th>
-                    <th>
-                        <!-- <em>Lower Section</em> -->
-                        Points
-                    </th> 
+                    <th>Points</th> 
                     <!-- Customizable crap for multiplayer? -->
                 </tr>
                 <tr>
-                    <!-- <em>Lower Section</em> -->
-                    Points
-                </tr>
-                <tr>
                     <td>1's</td>
-                    <td> Fill-in</td>
+                    <td data-num="1"> Fill-in</td>
                 </tr>
                 <tr>
                     <td>2's</td>
@@ -52,7 +45,72 @@
                 </tr>
                 <tr>
                     <td>6's</td>
-                    <td> Fill-in</td>
+                    <td>Fill-in</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>Fill-in</td>
+                </tr>
+                <tr>
+                    <td>63+ scores a 35 Bonus</td>
+                    <td>Fill-in</td>
+                </tr>
+                <tr>
+                    <td>Total After Bonus</td>
+                    <td>Fill-in</td>
+                </tr>
+            </table>
+
+            <table id="lower-scorecard">
+                <tr>
+                    <th>Lower Section</th>
+                    <th>Points</th>
+                </tr>
+                <tr>
+                    <td>3 of a Kind <strong>Total All Dice</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4 of a Kind <strong>Total All Dice</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Full House <strong>25</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Small Straight <strong>30</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Large Straight <strong>40</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Yahtzee <strong>50</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Chance <strong>Total All Dice</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Yahtzee Bonus <strong>100</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Total of Lower Section</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Total of Lower Section</strong></td>
+                    <td></td>
+                </tr>
+            </table>
+            <table id="gt">
+                <tr>
+                    <td>Grand Total</td>
+                    <td></td>
                 </tr>
             </table>
         </div>
