@@ -1,0 +1,33 @@
+body {
+  font-family: 'Manrope', sans-serif;  
+}
+
+table, tr, td{
+    border: 1px solid black;
+    border-collapse:collapse;
+    margin-bottom:1em;
+}
+
+td{
+    height:1.5em;
+}
+/* For all tables, look at 1st td of all tr's and do the following */
+table tr td:nth-child(1){
+    padding-right:0.5em;
+    text-align:right;
+}
+
+table tr td:nth-child(2):hover{
+    background: lightyellow;
+}
+
+table tr td:nth-child(2){
+    text-align: center;
+}
+.header{
+    font-weight:bold;
+}
+
+.die-face{
+    font-size:1.4em;   
+}

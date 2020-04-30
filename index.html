@@ -8,56 +8,59 @@
         <meta name="keywords" content="Yahtzee, JavaScript">
         <meta name="author" content="MC">
         <link rel="stylesheet" type="text/css" href="theme.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
         <noscript>Either your browser doesn't support JavaScript or you disabled it. Try again!</noscript>
     </head>
     <body>
         <h1>YAHTZEE</h1>
         <div id ="play-area">
-            <div id="dice-area"></div>
+            <div id="dice-area">
+
+            </div>
         </div>
         <div id="score-area">
             <table id="upper-scorecard">
                 <tr>
                     <!-- <em>Upper Section</em> -->
-                    <th>Upper Section</th>
-                    <th>Points</th> 
+                    <td class="header">Upper Section</td>
+                    <td class="header">Points</td>
                     <!-- Customizable crap for multiplayer? -->
                 </tr>
                 <tr>
-                    <td>1's</td>
-                    <td data-num="1"> Fill-in</td>
+                    <td><span class ="die-face">⚀</span> Count and add only <strong>1's</strong></td>
+                    <td data-num="1"> class = "pointbox" </td>
                 </tr>
                 <tr>
-                    <td>2's</td>
-                    <td> Fill-in</td>
+                    <td><span class ="die-face">⚁</span> Count and add only <strong>2's</strong></td>
+                    <td> class = "pointbox" </td>
                 </tr>
                 <tr>
-                    <td>3's</td>
-                    <td> Fill-in</td>
+                    <td><span class ="die-face">⚂</span> Count and add only <strong>3's</strong></td>
+                    <td> class = "pointbox" </td>
                 </tr>
                 <tr>
-                    <td>4's</td>
-                    <td> Fill-in</td>
+                    <td><span class ="die-face">⚃</span> Count and add only <strong>4's</strong></td>
+                    <td> class = "pointbox" </td>
                 </tr>
                 <tr>
-                    <td>5's</td>
-                    <td> Fill-in</td>
+                    <td><span class ="die-face">⚄</span> Count and add only <strong>5's</strong></td>
+                    <td> class = "pointbox" </td>
                 </tr>
                 <tr>
-                    <td>6's</td>
-                    <td>Fill-in</td>
+                    <td><span class ="die-face">⚅</span> Count and add only <strong>6's</strong></td>
+                    <td class = "pointbox"></td>
                 </tr>
                 <tr>
-                    <td>Total</td>
-                    <td>Fill-in</td>
+                    <td><strong>Total</strong></td>
+                    <td class = "pointbox"></td>
                 </tr>
                 <tr>
-                    <td>63+ scores a 35 Bonus</td>
-                    <td>Fill-in</td>
+                    <td>63+ scores a <strong>35 Bonus</strong></td>
+                    <td class = "pointbox"></td>
                 </tr>
                 <tr>
-                    <td>Total After Bonus</td>
-                    <td>Fill-in</td>
+                    <td><strong>Total</strong> After Bonus</td>
+                    <td class = "pointbox"></td>
                 </tr>
             </table>
 
@@ -68,43 +71,43 @@
                 </tr>
                 <tr>
                     <td>3 of a Kind <strong>Total All Dice</strong></td>
-                    <td></td>
+                    <td class = "pointbox"></td>
                 </tr>
                 <tr>
                     <td>4 of a Kind <strong>Total All Dice</strong></td>
-                    <td></td>
+                    <td class = "pointbox"></td>
                 </tr>
                 <tr>
                     <td>Full House <strong>25</strong></td>
-                    <td></td>
+                    <td class = "pointbox"></td>
                 </tr>
                 <tr>
                     <td>Small Straight <strong>30</strong></td>
-                    <td></td>
+                    <td class = "pointbox"></td>
                 </tr>
                 <tr>
                     <td>Large Straight <strong>40</strong></td>
-                    <td></td>
+                    <td class = "pointbox"></td>
                 </tr>
                 <tr>
                     <td>Yahtzee <strong>50</strong></td>
-                    <td></td>
+                    <td class = "pointbox"></td>
                 </tr>
                 <tr>
                     <td>Chance <strong>Total All Dice</strong></td>
-                    <td></td>
+                    <td class = "pointbox"></td>
                 </tr>
                 <tr>
                     <td>Yahtzee Bonus <strong>100</strong></td>
-                    <td></td>
+                    <td class = "pointbox"></td>
                 </tr>
                 <tr>
                     <td><strong>Total of Lower Section</strong></td>
-                    <td></td>
+                    <td class = "pointbox"></td>
                 </tr>
                 <tr>
                     <td><strong>Total of Lower Section</strong></td>
-                    <td></td>
+                    <td class = "pointbox"></td>
                 </tr>
             </table>
             <table id="gt">
