@@ -1,9 +1,18 @@
-let dice = []
+// let dice = []
 let score = 0
 let diceCounts = {}
-function run(){
 
+function run(){
+    let start = document.getElementById("start")
+    start.addEventListener("click", () => alert("HEY"))
 }
+
+function gameStart(){
+    let pointboxes = Array.from(document.getElementsByClassName("pointbox"))
+    pointboxes.forEach(box => box.innerText= "")
+}
+
+
 
 function roll(hold = []){
     // [1,2,3,4,4]
@@ -111,3 +120,4 @@ function fullHouseScore(dice){
         
     }
 
+run()
