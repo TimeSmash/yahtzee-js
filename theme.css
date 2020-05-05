@@ -2,6 +2,11 @@ body {
   font-family: 'Manrope', sans-serif;  
 }
 
+#dice-area{
+    height:7em;
+    background:lightgrey;
+}
+
 table, tr, td{
     border: 1px solid black;
     border-collapse:collapse;
