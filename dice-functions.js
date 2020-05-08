@@ -46,8 +46,6 @@ function clearOldDice(){
     }
 }
 
-//Roll button: Can it not just stay existing when a 2nd game is started?
-
 function addRollButton(){
     let rollButtonExists = document.getElementById("roll")
     if(rollButtonExists){
@@ -62,19 +60,23 @@ function addRollButton(){
         playArea.appendChild(rollButton)
     }
 }
-
-function removeRollButton(){
-    let rollButton = document.getElementById("roll")
-    if(rollButton){
-        rollButton.parentElement.removeChild(rollButton)
-    } else {
-        null
-    }
-}
+// Can probs delete this:
+// function removeRollButton(){
+//     let rollButton = document.getElementById("roll")
+//     if(rollButton){
+//         rollButton.parentElement.removeChild(rollButton)
+//     } else {
+//         null
+//     }
+// }
 
 function revealDiceColorForm(){
     let dcf = document.getElementById("dice-color-form")
-    dcf.style.visibility = "visible"
+    if(dcf.style.visibility === "visible"){
+        return null
+    } else {
+        dcf.style.visibility = "visible"
+    }
 }
 
 function initializeDice(){
@@ -123,9 +125,9 @@ function confirmNewGame(){
 
 function gameStart(){
     clearPointboxes();
+    revealDiceColorForm();
     revertDiceColorSelectToNone();
     addRollButton();
-    revealDiceColorForm();
     // empty dice holder???
     // ???
     // roll();
