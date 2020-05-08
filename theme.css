@@ -120,10 +120,10 @@ body {
     height:1.5em;  
 }
 
-.spacer{
-    max-height:1em;
+.spacer td{
+    max-height:0.5em;
     border-left:1px solid transparent;
-    border-right:0;   
+    border-right:1px solid transparent;   
 }
 /* For all tables, look at 1st td of all tr's and do the following */
 #scorecard tr td:nth-child(1){
@@ -132,7 +132,8 @@ body {
     /* text-align:right; */
 }
 
-#scorecard tr td:nth-child(2):hover{
+/* Needs to be altered so totas can't be highlighted */
+.pointbox:hover{
     background: lightyellow;
 }
 

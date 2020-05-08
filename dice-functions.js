@@ -13,8 +13,14 @@ let remainingRolls = 3
 
 
 function clearPointboxes(){
-    let pointboxes = Array.from(document.getElementsByClassName("pointbox"))
-    pointboxes.forEach(box => box.innerText= "")
+    let rows = Array.from(scorecard.firstElementChild.children)
+    rows.forEach(row => {
+        if(row.classList[0] === "section"){
+            null
+        } else {
+            console.log(row.children[1].innerText="")
+        }
+    })
 }
 
 function clearOldDice(){
