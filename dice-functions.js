@@ -44,10 +44,15 @@ function clearPointboxes(){
     pointboxes.forEach(box => box.innerText= "")
 }
 
+function revealDiceColorForm(){
+    let dcf = document.getElementById("dice-color-form")
+    dcf.style.visibility = "visible"
+}
+
 function gameStart(){
-    // clear pointboxes
     clearPointboxes();
     addRollButton();
+    revealDiceColorForm();
     // empty dice holder???
     // let diceHolder = document.getElementById("dice-holder")
     // diceHolder
@@ -144,6 +149,8 @@ function displayDice(){
 function resetDice(){
 
 }
+
+// SCORING STUFF
 
 diceAmounts = (dice) => { 
 	let kinds = {}
