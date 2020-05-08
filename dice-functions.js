@@ -46,16 +46,21 @@ function clearOldDice(){
     }
 }
 
+//Roll button: Can it not just stay existing when a 2nd game is started?
+
 function addRollButton(){
-    // remove roll button from previous game if it exists
-    removeRollButton();
-    let rollButton = document.createElement("button")
-    let playArea = document.getElementById("play-area")
-    rollButton.id="roll"
-    rollButton.innerText="Roll"
-    // Need to work this out
-    rollButton.addEventListener("click", (e,[]) => {rollHandler})
-    playArea.appendChild(rollButton)
+    let rollButtonExists = document.getElementById("roll")
+    if(rollButtonExists){
+        return null
+    } else {
+        let rollButton = document.createElement("button")
+        let playArea = document.getElementById("play-area")
+        rollButton.id="roll"
+        rollButton.innerText="Roll"
+        // Need to work this out
+        rollButton.addEventListener("click", (e,[]) => {rollHandler})
+        playArea.appendChild(rollButton)
+    }
 }
 
 function removeRollButton(){

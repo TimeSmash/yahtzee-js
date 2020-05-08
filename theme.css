@@ -120,6 +120,7 @@ body {
     height:1.5em;  
 }
 
+/* HEIGHT needs to be less than others */
 .spacer td{
     max-height:0.5em;
     border-left:1px solid transparent;
