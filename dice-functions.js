@@ -1,36 +1,86 @@
 let dice = [{},{},{},{},{}]
 let score = 0
 let diceCounts = {}
+let remainingRolls = 3
 
 // die structure
 // face: #
 // img: dieface-# (# is face)
 // hold: boolean
 
-function diceColorChange(event){
-    let dice = Array.from(document.getElementsByClassName("die"))
-    let value = event.target.value
-    dice.forEach(die => {
-        if(event.target.value.endsWith(")") ){
-            die.style=`background-image:${event.target.value}`
-        } else {
-            die.style=`background:${event.target.value}`
-        }
-    })
+
+//  INITIALIZING STUFF //
+
+
+function clearPointboxes(){
+    let pointboxes = Array.from(document.getElementsByClassName("pointbox"))
+    pointboxes.forEach(box => box.innerText= "")
+}
+
+function clearOldDice(){
+    // check if dice already present (prev game started)
+    // If so, clear them out. If not, don't need to do anything
+    let dieslotRow = document.getElementById("dieslot-row")
+    let dicePresent = dieslotRow.firstElementChild.innerHTML
+    if(dicePresent){
+        let dieslots = Array.from(dieslotRow.children)
+        dieslots.forEach(dieslot => dieslot.removeChild(dieslot.firstChild))
+    } else {
+        null
+    }
 }
 
 function addRollButton(){
+    // remove roll button from previous game if it exists
+    removeRollButton();
     let rollButton = document.createElement("button")
     let playArea = document.getElementById("play-area")
+    rollButton.id="roll"
     rollButton.innerText="Roll"
     // Need to work this out
-    rollButton.addEventListener("click", e=> {roll(e,[])})
+    rollButton.addEventListener("click", (e,[]) => {rollHandler})
     playArea.appendChild(rollButton)
 }
 
-// function rollHandler(event){
-//     roll(event,)
-// }
+function removeRollButton(){
+    let rollButton = document.getElementById("roll")
+    if(rollButton){
+        rollButton.parentElement.removeChild(rollButton)
+    } else {
+        null
+    }
+}
+
+function revealDiceColorForm(){
+    let dcf = document.getElementById("dice-color-form")
+    dcf.style.visibility = "visible"
+}
+
+function initializeDice(){
+    // clear old dice from previous game
+    clearOldDice();
+    // Performs first roll and appends dice imgs to dice-area
+    // The first roll can probably be done by a reworked roll() fxn
+    let i = 0
+    while(i<5){
+        let randomNum = Math.ceil(Math.random()*6)
+        dice[i]["face"] = randomNum
+        dice[i]["img"] = "images/dieface-" + randomNum +".png"
+        i++
+    }
+    let diceHolder = document.getElementById("dice-holder")
+    let firstDiceHolderRow = Array.from(diceHolder.firstElementChild.firstElementChild.children)
+    dice.forEach((die,index) => {
+        let dieEle = document.createElement("img")
+        dieEle.src = die["img"]
+        dieEle.alt = die["face"]
+        dieEle.classList.add("die")
+        dieEle.addEventListener("click", holdClickHandler)
+        firstDiceHolderRow[index].appendChild(dieEle)
+    })
+}
+
+
 
 function initialize(){
     let start = document.getElementById("start")
@@ -39,28 +89,83 @@ function initialize(){
     colorSelector.addEventListener("change", (e) =>{diceColorChange(e)})
 }
 
-function clearPointboxes(){
-    let pointboxes = Array.from(document.getElementsByClassName("pointbox"))
-    pointboxes.forEach(box => box.innerText= "")
-}
-
-function revealDiceColorForm(){
-    let dcf = document.getElementById("dice-color-form")
-    dcf.style.visibility = "visible"
-}
-
 function gameStart(){
     clearPointboxes();
     addRollButton();
     revealDiceColorForm();
     // empty dice holder???
-    // let diceHolder = document.getElementById("dice-holder")
-    // diceHolder
     // ???
-    // roll new dice
-    // console.log("rolling")
-    roll();
-    displayDice();
+    // roll();
+    initializeDice();
+}
+
+function diceColorChange(event){
+    let dice = Array.from(document.getElementsByClassName("die"))
+    let value = event.target.value
+    dice.forEach(die => {
+        if(value.endsWith(")") ){
+            die.style=`background-image:${value}`
+        } else {
+            die.style=`background:${value}`
+        }
+    })
+}
+// function addRollButton(){
+//     let rollButton = document.createElement("button")
+//     let playArea = document.getElementById("play-area")
+//     rollButton.innerText="Roll"
+//     // Need to work this out
+//     rollButton.addEventListener("click", (e,[]) => {rollHandler})
+//     playArea.appendChild(rollButton)
+// }
+
+function checkForHeldDice(){
+    let heldDice = Array.from(document.getElementsByClassName("hold"))
+    if(heldDice.length){
+        //something is held, get dieslots of held (strings)
+        if(heldDice.length === 5){
+            // account for ALL dice being held
+            return "all"
+        }
+        let heldDieslots = held.forEach(die => console.log(die.parentElement.dataset.dieslot))
+        return heldDieslots
+    } else {
+        return false
+    }
+    
+}
+
+//check to see if any dice held
+//If not reroll all dice by
+function rollHandler(event,hold){
+    roll(event,hold)
+}
+
+function roll(e,hold = []){
+    //
+    let heldDice = checkForHeldDice()
+    if(heldDice === "all"){
+        // if all dice are held do not proceed with roll
+        // alert "You are currently holding all of your dice. Un-hold some dice to roll them."
+    } else if (heldDice){
+        // some dice are held
+    } else {
+        // no dice are held
+    }
+    //
+    // [1,2,3,4,4]
+    console.log("roll firing",hold)
+    if(hold.length === 0){
+        let i = 0
+        while(i<5){
+            let randomNum = Math.ceil(Math.random()*6)
+            dice[i]["face"] = randomNum
+            dice[i]["img"] = "images/dieface-" + randomNum +".png"
+            i++
+        }
+    } else {
+        console.log("hold",hold)
+    }
 }
 
 function createHoldSpan(){
@@ -91,7 +196,7 @@ function hold(clickEvent){
     holdslot.appendChild(holdSpan)
 
     // Needed? 
-    // die.classList.add("hold")
+    die.classList.add("hold")
     die.addEventListener("click", unholdClickHandler)
 }
 
@@ -103,29 +208,11 @@ function unhold(clickEvent){
     
     let dieslot = clickEvent.target.parentElement.dataset.dieslot
     let holdslot = Array.from(document.getElementById("holdslot-row").children).find(td => td.dataset.holdslot === dieslot)
+    // consider removing innerHTML in  different way
     holdslot.innerHTML = ""
 // Remove hold class??
+die.classList.remove("hold")
     die.addEventListener("click", holdClickHandler)
-}
-
-function roll(e,hold = []){
-    // [1,2,3,4,4]
-    console.log("roll firing",hold)
-    if(hold.length === 0){
-        let i = 0
-        while(i<5){
-            let randomNum = Math.ceil(Math.random()*6)
-            dice[i]["face"] = randomNum
-            dice[i]["img"] = "images/dieface-" + randomNum +".png"
-            i++
-        }
-    } else {
-        console.log("hold",hold)
-    }
-}
-
-function holdClickHandler(event){
-    hold(event)
 }
 
 function displayDice(){
