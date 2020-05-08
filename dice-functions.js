@@ -23,6 +23,11 @@ function clearPointboxes(){
     })
 }
 
+function revertDiceColorSelectToNone(){
+    let diceColorSelect = document.getElementById("dice-color")
+    diceColorSelect.value = "none"
+}
+
 function dicePresent(){
     let dieslotRow = document.getElementById("dieslot-row")
     let dicePresent = dieslotRow.firstElementChild.innerHTML
@@ -113,6 +118,7 @@ function confirmNewGame(){
 
 function gameStart(){
     clearPointboxes();
+    revertDiceColorSelectToNone();
     addRollButton();
     revealDiceColorForm();
     // empty dice holder???
@@ -156,6 +162,9 @@ function checkForHeldDice(){
     }
     
 }
+
+// END INITIALIZING STUFF
+
 
 //check to see if any dice held
 //If not reroll all dice by
