@@ -23,12 +23,16 @@ function clearPointboxes(){
     })
 }
 
+function dicePresent(){
+    let dieslotRow = document.getElementById("dieslot-row")
+    let dicePresent = dieslotRow.firstElementChild.innerHTML
+    return dicePresent
+}
+
 function clearOldDice(){
     // check if dice already present (prev game started)
     // If so, clear them out. If not, don't need to do anything
-    let dieslotRow = document.getElementById("dieslot-row")
-    let dicePresent = dieslotRow.firstElementChild.innerHTML
-    if(dicePresent){
+    if(dicePresent()){
         let dieslots = Array.from(dieslotRow.children)
         dieslots.forEach(dieslot => dieslot.removeChild(dieslot.firstChild))
     } else {
@@ -90,9 +94,20 @@ function initializeDice(){
 
 function initialize(){
     let start = document.getElementById("start")
-    start.addEventListener("click", gameStart)
+    start.addEventListener("click", confirmNewGame)
     let colorSelector = document.getElementById("dice-color")
     colorSelector.addEventListener("change", (e) =>{diceColorChange(e)})
+}
+
+function confirmNewGame(){
+    if(dicePresent()){
+        let proceed = confirm("This will start a new game and the current game's progress will be lost. Continue?")
+        if(proceed){
+            gameStart()
+        }
+    } else {
+        gameStart()
+    }
 }
 
 function gameStart(){
