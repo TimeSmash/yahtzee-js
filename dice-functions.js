@@ -18,7 +18,7 @@ function clearPointboxes(){
         if(row.classList[0] === "section"){
             null
         } else {
-            console.log(row.children[1].innerText="")
+            row.children[1].innerText=""
         }
     })
 }
@@ -32,6 +32,7 @@ function dicePresent(){
 function clearOldDice(){
     // check if dice already present (prev game started)
     // If so, clear them out. If not, don't need to do anything
+    let dieslotRow = document.getElementById("dieslot-row")
     if(dicePresent()){
         let dieslots = Array.from(dieslotRow.children)
         dieslots.forEach(dieslot => dieslot.removeChild(dieslot.firstChild))
@@ -148,7 +149,7 @@ function checkForHeldDice(){
             // account for ALL dice being held
             return "all"
         }
-        let heldDieslots = held.forEach(die => console.log(die.parentElement.dataset.dieslot))
+        // let heldDieslots = held.forEach(die => console.log(die.parentElement.dataset.dieslot))
         return heldDieslots
     } else {
         return false
