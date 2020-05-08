@@ -1,28 +1,143 @@
-// let dice = []
+let dice = [{},{},{},{},{}]
 let score = 0
 let diceCounts = {}
 
-function run(){
-    let start = document.getElementById("start")
-    start.addEventListener("click", () => alert("HEY"))
+// die structure
+// face: #
+// img: dieface-# (# is face)
+// hold: boolean
+
+function diceColorChange(event){
+    let dice = Array.from(document.getElementsByClassName("die"))
+    let value = event.target.value
+    dice.forEach(die => {
+        if(event.target.value.endsWith(")") ){
+            die.style=`background-image:${event.target.value}`
+        } else {
+            die.style=`background:${event.target.value}`
+        }
+    })
 }
 
-function gameStart(){
+function addRollButton(){
+    let rollButton = document.createElement("button")
+    let playArea = document.getElementById("play-area")
+    rollButton.innerText="Roll"
+    // Need to work this out
+    rollButton.addEventListener("click", e=> {roll(e,[])})
+    playArea.appendChild(rollButton)
+}
+
+// function rollHandler(event){
+//     roll(event,)
+// }
+
+function initialize(){
+    let start = document.getElementById("start")
+    start.addEventListener("click", gameStart)
+    let colorSelector = document.getElementById("dice-color")
+    colorSelector.addEventListener("change", (e) =>{diceColorChange(e)})
+}
+
+function clearPointboxes(){
     let pointboxes = Array.from(document.getElementsByClassName("pointbox"))
     pointboxes.forEach(box => box.innerText= "")
 }
 
+function gameStart(){
+    // clear pointboxes
+    clearPointboxes();
+    addRollButton();
+    // empty dice holder???
+    // let diceHolder = document.getElementById("dice-holder")
+    // diceHolder
+    // ???
+    // roll new dice
+    // console.log("rolling")
+    roll();
+    displayDice();
+}
+
+function createHoldSpan(){
+    let holdSpan = document.createElement("span")
+    holdSpan.classList.add("hold-span")
+    holdSpan.innerText="HOLD"
+    return holdSpan
+}
 
 
-function roll(hold = []){
+
+function holdClickHandler(event){
+    hold(event)
+}
+
+function unholdClickHandler(event){
+    unhold(event)
+}
+
+
+function hold(clickEvent){
+    // console.log("hold firing")
+    let die = clickEvent.target
+    die.removeEventListener("click",holdClickHandler)
+    let dieslot = clickEvent.target.parentElement.dataset.dieslot
+    let holdslot = Array.from(document.getElementById("holdslot-row").children).find(td => td.dataset.holdslot === dieslot)
+    let holdSpan = createHoldSpan()
+    holdslot.appendChild(holdSpan)
+
+    // Needed? 
+    // die.classList.add("hold")
+    die.addEventListener("click", unholdClickHandler)
+}
+
+function unhold(clickEvent){
+    // console.log("unhold firing")
+    let die = clickEvent.target
+    
+    die.removeEventListener("click", unholdClickHandler)
+    
+    let dieslot = clickEvent.target.parentElement.dataset.dieslot
+    let holdslot = Array.from(document.getElementById("holdslot-row").children).find(td => td.dataset.holdslot === dieslot)
+    holdslot.innerHTML = ""
+// Remove hold class??
+    die.addEventListener("click", holdClickHandler)
+}
+
+function roll(e,hold = []){
     // [1,2,3,4,4]
+    console.log("roll firing",hold)
     if(hold.length === 0){
         let i = 0
         while(i<5){
-            dice[i] = Math.ceil(Math.random()*6)
+            let randomNum = Math.ceil(Math.random()*6)
+            dice[i]["face"] = randomNum
+            dice[i]["img"] = "images/dieface-" + randomNum +".png"
+            i++
         }
     } else {
-        dice.filter()
+        console.log("hold",hold)
+    }
+}
+
+function holdClickHandler(event){
+    hold(event)
+}
+
+function displayDice(){
+    let diceHolder = document.getElementById("dice-holder")
+    let firstDiceHolderRow = Array.from(diceHolder.firstElementChild.firstElementChild.children)
+    if (firstDiceHolderRow[0].innerHTML.length === 0){
+        //add the dice, console.log(firstDH, firstDiceHolderRow)
+        dice.forEach((die,index) => {
+            let dieEle = document.createElement("img")
+            dieEle.src = die["img"]
+            dieEle.alt = die["face"]
+            dieEle.classList.add("die")
+            dieEle.addEventListener("click", holdClickHandler)
+            firstDiceHolderRow[index].appendChild(dieEle)
+        })
+    } else {
+        //
     }
 }
 
@@ -120,4 +235,4 @@ function fullHouseScore(dice){
         
     }
 
-run()
+initialize()

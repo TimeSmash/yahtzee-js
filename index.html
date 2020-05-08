@@ -8,115 +8,147 @@
         <meta name="keywords" content="Yahtzee, JavaScript">
         <meta name="author" content="MC">
         <link rel="stylesheet" type="text/css" href="theme.css">
-        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
         <noscript>Either your browser doesn't support JavaScript or you disabled it. Try again!</noscript>
     </head>
     <body>
         <h1>YAHTZEE</h1>
-        <!-- <image src ="images/dieface-1.png"></image> -->
-        <button id="start">Start</button>
+        <div id="play-options">
+            <button id="start">Start New Game</button>
+            <form id="dice-color-form">
+                <label>Choose a dice color:</label>
+                <select id="dice-color" name ="dice-color">
+                    <option value="none">None</option>
+                    <option value="white">White</option>
+                    <option value="pink">Pink</option>
+                    <option value="red">Red</option>
+                    <option value="lightgreen">Green</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="radial-gradient(white, pink, red)">Cherry Blossom</option>
+                    <option value="radial-gradient(white, lavender, purple)">Lavender Bloom</option>
+                </select>
+            </form>
+        </div>
         <!-- Multiplayer <form>
             <input type="text" label="name" name="name" placeholder="Player 1">
             <select label></select>
         </form> -->
-        <div id ="play-area">
-            <div id="dice-area"></div>
+        <div id="play-area">
+            <div id="dice-area">
+                <table id="dice-holder">
+                    <tr>
+                        <td data-dieslot="1"></td>
+                        <td data-dieslot="2"></td>
+                        <td data-dieslot="3"></td>
+                        <td data-dieslot="4"></td>
+                        <td data-dieslot="5"></td>
+                    </tr>
+                    <tr id="holdslot-row">
+                        <td data-holdslot="1"></td>
+                        <td data-holdslot="2"></td>
+                        <td data-holdslot="3"></td>
+                        <td data-holdslot="4"></td>
+                        <td data-holdslot="5"></td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div id="score-area">
-            <table id="upper-scorecard">
+            <table id="scorecard">  
                 <tr>
                     <!-- <em>Upper Section</em> -->
-                    <td class="header">Upper Section</td>
+                    <td class="section">Upper Section</td>
                     <td class="header">Points</td>
                     <!-- Customizable crap for multiplayer? -->
                 </tr>
                 <tr>
-                    <td><span class ="die-face">⚀</span> Count and add only <strong>1's</strong></td>
+                    <td class="us-dice"><span class ="sc-die-face">⚀</span> Count and add only <strong>1's</strong></td>
                     <td data-num="1"class = "pointbox">  </td>
                 </tr>
                 <tr>
-                    <td><span class ="die-face">⚁</span> Count and add only <strong>2's</strong></td>
+                    <td class="us-dice"><span class ="sc-die-face">⚁</span> Count and add only <strong>2's</strong></td>
                     <td class = "pointbox">  </td>
                 </tr>
                 <tr>
-                    <td><span class ="die-face">⚂</span> Count and add only <strong>3's</strong></td>
+                    <td class="us-dice"><span class ="sc-die-face">⚂</span> Count and add only <strong>3's</strong></td>
                     <td class = "pointbox">  </td>
                 </tr>
                 <tr>
-                    <td><span class ="die-face">⚃</span> Count and add only <strong>4's</strong></td>
+                    <td class="us-dice"><span class ="sc-die-face">⚃</span> Count and add only <strong>4's</strong></td>
                     <td class = "pointbox">  </td>
                 </tr>
                 <tr>
-                    <td><span class ="die-face">⚄</span> Count and add only <strong>5's</strong></td>
+                    <td class="us-dice"><span class ="sc-die-face">⚄</span> Count and add only <strong>5's</strong></td>
                     <td class = "pointbox">  </td>
                 </tr>
                 <tr>
-                    <td><span class ="die-face">⚅</span> Count and add only <strong>6's</strong></td>
+                    <td class="us-dice"><span class ="sc-die-face">⚅</span> Count and add only <strong>6's</strong></td>
                     <td class = "pointbox"></td>
                 </tr>
                 <tr>
-                    <td><strong>Total</strong></td>
+                    <td><span class="us-left"></span><span class ="us-right">Total</span></td>
                     <td class = "pointbox"></td>
                 </tr>
                 <tr>
-                    <td>63+ scores a <strong>35 Bonus</strong></td>
+                    <td><span id="us-63">63+ scores a </span><strong>35 Bonus</strong></td>
                     <td class = "pointbox"></td>
                 </tr>
                 <tr>
-                    <td><strong>Total</strong> After Bonus</td>
+                    <td><span class="us-left"></span><span class ="us-right">Total After Bonus</span></td>
                     <td class = "pointbox"></td>
                 </tr>
-            </table>
-
-            <table id="lower-scorecard">
                 <tr>
-                    <th>Lower Section</th>
+                    <td class="spacer"></td>
+                </tr>
+                <tr>
+                    <td class="section">Lower Section</th>
                     <th>Points</th>
                 </tr>
                 <tr>
-                    <td>3 of a Kind <strong>Total All Dice</strong></td>
+                    <td><span class="ls-left">3 of a Kind</span> <span class ="ls-right">Total All Dice</span></td>
                     <td class = "pointbox"></td>
                 </tr>
                 <tr>
-                    <td>4 of a Kind <strong>Total All Dice</strong></td>
+                    <td><span class="ls-left">4 of a Kind</span> <span class ="ls-right">Total All Dice</span></td>
                     <td class = "pointbox"></td>
                 </tr>
                 <tr>
-                    <td>Full House <strong>25</strong></td>
+                    <td><span class="ls-left">Full House</span> <span class ="ls-right">25</span></td>
                     <td class = "pointbox"></td>
                 </tr>
                 <tr>
-                    <td>Small Straight <strong>30</strong></td>
+                    <td><span class="ls-left">Small Straight</span> <span class ="ls-right">30</span></td>
                     <td class = "pointbox"></td>
                 </tr>
                 <tr>
-                    <td>Large Straight <strong>40</strong></td>
+                    <td><span class="ls-left">Large Straight</span> <span class ="ls-right">40</strong></td>
                     <td class = "pointbox"></td>
                 </tr>
                 <tr>
-                    <td>Yahtzee <strong>50</strong></td>
+                    <td><span class="ls-left"><strong>Yahtzee</strong></span> <span class ="ls-right">50</span></td>
                     <td class = "pointbox"></td>
                 </tr>
                 <tr>
-                    <td>Chance <strong>Total All Dice</strong></td>
+                    <td><span class="ls-left">Chance</span> <span class ="ls-right">Total All Dice</span></td>
                     <td class = "pointbox"></td>
                 </tr>
                 <tr>
-                    <td>Yahtzee Bonus <strong>100</strong></td>
-                    <td class = "pointbox"></td>
-                </tr>
-                <tr>
-                    <td><strong>Total of Lower Section</strong></td>
+                    <td><span class="ls-left">Yahtzee Bonus</span> <span class ="ls-right">100</span></td>
                     <td class = "pointbox"></td>
                 </tr>
                 <tr>
                     <td><strong>Total of Lower Section</strong></td>
                     <td class = "pointbox"></td>
                 </tr>
-            </table>
-            <table id="gt">
                 <tr>
-                    <td>Grand Total</td>
+                    <td><strong>Total of Upper Section</strong></td>
+                    <td class = "pointbox"></td>
+                </tr>
+                <tr class="spacer">
+                    <td class="spacer"></td>
+                </tr>
+                <tr>
+                    <td class="section"><strong>Grand Total</strong></td>
                     <td></td>
                 </tr>
             </table>
